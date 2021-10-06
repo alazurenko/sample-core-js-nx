@@ -1,7 +1,49 @@
 {
   "version": 2,
-  "projects": {},
+  "projects": {
+    "mylibrary": {
+      "root": "libs/mylibrary",
+      "sourceRoot": "libs/mylibrary/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/mylibrary",
+            "tsConfig": "libs/mylibrary/tsconfig.lib.json",
+            "project": "libs/mylibrary/package.json",
+            "entryFile": "libs/mylibrary/src/index.ts",
+            "external": ["react/jsx-runtime"]
+          },
+          "umdName": "mylibrary"
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/mylibrary/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/mylibrary"],
+          "options": {
+            "jestConfig": "libs/mylibrary/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
+    "defaultCollection": "@nrwl/react"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "babel": true
+      }
+    }
   }
 }
